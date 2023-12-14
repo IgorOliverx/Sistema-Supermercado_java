@@ -17,6 +17,8 @@ public class VendasDAO extends CrudDAO<Vendas> {
 
     private List<Vendas> vendas;
 
+    private int codVenda;
+
     public VendasDAO() {
         this.connection = ConnectionFactory.getConnection();
     }
@@ -90,7 +92,22 @@ public class VendasDAO extends CrudDAO<Vendas> {
         }
     }
     
-
+    public void limparTabela() {
+        PreparedStatement stmt = null;
+    
+        String sql = "DELETE FROM vendas_infinity";
+    
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.executeUpdate();
+            System.out.println("Tabela de vendas limpa com sucesso");
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao limpar a tabela de vendas: " + e.getMessage(), e);
+        } finally {
+            ConnectionFactory.closeConnection(connection, stmt);
+        }
+    }
+    
    
     
 
@@ -101,7 +118,7 @@ public class VendasDAO extends CrudDAO<Vendas> {
         String sql = "DELETE FROM vendas_infinity WHERE CODVENDA = ?";
         try {
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, codVenda);
+            stmt.setInt(1, Integer.parseInt(codVenda));
             stmt.executeUpdate();
             System.out.println("Dado apagado com sucesso - Substituir por log do sistema");
         } catch (SQLException e) {
@@ -187,6 +204,32 @@ public class VendasDAO extends CrudDAO<Vendas> {
         throw new UnsupportedOperationException("Unimplemented method 'verificarEstoque'");
     }
 
+    public int recuperaCodigo(){
+           String sql = "SELECT CODVENDA FROM vendas_infinity";
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        codVenda = 0;
+
+        try{
+            stmt = connection.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            if(rs.next()){
+                codVenda = rs.getInt("codvenda");
+            }
+        }catch(SQLException e){
+            System.out.println("Erro ao retornar cod venda - 203 vendasDAO" + e.getMessage());
+        }
+
+
+
+        return codVenda;
+    }
+
+    
+
+   
 
     
 }

@@ -182,7 +182,7 @@ public class ProdutosDAO extends CrudDAO<Produtos>{
         PreparedStatement stmt = null;
         ResultSet rs = null;
         String sql = "SELECT pclientevip, pcliente FROM produtos_infinity WHERE codigo = ?";
-        double valor = 0;
+        double valores = 0;
     
         try {
             stmt = connection.prepareStatement(sql);
@@ -191,7 +191,7 @@ public class ProdutosDAO extends CrudDAO<Produtos>{
     
             // Verifique se há resultados e obtenha o valor
             if (rs.next()) {
-                valor = rs.getDouble("pclientevip");
+                valores = rs.getDouble("pclientevip");
             }
     
         } catch (SQLException e) {
@@ -200,7 +200,7 @@ public class ProdutosDAO extends CrudDAO<Produtos>{
             ConnectionFactory.closeConnection(connection, stmt, rs);
         }
     
-        return valor; // Retorna o valor recuperado da consulta
+        return valores; // Retorna o valor recuperado da consulta
     }
 
 

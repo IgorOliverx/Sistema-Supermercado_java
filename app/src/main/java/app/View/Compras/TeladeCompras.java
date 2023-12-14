@@ -4,6 +4,13 @@ package app.View.Compras;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.util.List;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import app.Connection.ProdutosDAO;
+import app.Model.Produtos;
 
 /**
  *
@@ -11,11 +18,14 @@ package app.View.Compras;
  */
 public class TeladeCompras extends javax.swing.JFrame {
 
+    private ProdutosDAO produtos;
     /**
      * Creates new form TeladeCompras
      */
     public TeladeCompras() {
         initComponents();
+        produtos = new ProdutosDAO();
+        preencherTabela();
     }
 
     /**
@@ -130,7 +140,7 @@ public class TeladeCompras extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "CÓD PRODUTO", "PRODUTO", "QUANTIDADE", "VALOR"
+                "CÓD PRODUTO", "PRODUTO"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -156,12 +166,17 @@ public class TeladeCompras extends javax.swing.JFrame {
 
         jTextFieldPreco.setBackground(new java.awt.Color(242, 242, 242));
         jTextFieldPreco.setBorder(javax.swing.BorderFactory.createTitledBorder("PREÇO"));
+        double valor = new PanelCompra().labelTotalValor;
+        String labelTotal =String.valueOf(valor);
+        jTextFieldPreco.setText(labelTotal);
 
         jTextFieldCódVend.setBackground(new java.awt.Color(242, 242, 242));
         jTextFieldCódVend.setBorder(javax.swing.BorderFactory.createTitledBorder("CÓD VENDA"));
+        jTextFieldCódVend.setText("0");
 
         jTextFieldCliente.setBackground(new java.awt.Color(242, 242, 242));
         jTextFieldCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("CLIENTE"));
+        
 
         javax.swing.GroupLayout jPanelResumVendLayout = new javax.swing.GroupLayout(jPanelResumVend);
         jPanelResumVend.setLayout(jPanelResumVendLayout);
@@ -201,7 +216,8 @@ public class TeladeCompras extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1FinVendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1FinVendActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Compra finalizada");
+        System.exit(0);
     }//GEN-LAST:event_jButton1FinVendActionPerformed
 
     private void jButton3CancelVendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3CancelVendActionPerformed
@@ -215,40 +231,20 @@ public class TeladeCompras extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TeladeCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TeladeCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TeladeCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TeladeCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    
+private void preencherTabela(){
+        lista = produtos.listarTodos();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        for (Produtos produto : lista) {
+            Object[] row = {produto.getCodigo(), produto.getNome()};
+            model.addRow(row);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TeladeCompras().setVisible(true);
-            }
-        });
-    }
-
+}
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private List<Produtos> lista;
     private javax.swing.JButton jButton1FinVend;
     private javax.swing.JButton jButton3CancelVend;
     private javax.swing.JComboBox<String> jComboBoxPagamentos;

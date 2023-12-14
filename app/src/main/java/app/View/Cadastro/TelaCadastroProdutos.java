@@ -166,14 +166,20 @@ public class TelaCadastroProdutos extends JPanel {
         table.getColumnModel().getColumn(6).setCellRenderer(
             new DefaultTableCellRenderer(){
                 public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
-                    Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                    boolean statusEstoque = (boolean) value;
-                    if(statusEstoque == false ){
-                        c.setBackground(vermelhoColor);
-                    }else{
-                        c.setBackground(Color.GREEN);
+             
+                       Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                       if (value != null && value instanceof Boolean) {
+                        boolean statusEstoque = (Boolean) value;
+                        if (!statusEstoque) {
+                            c.setBackground(vermelhoColor);
+                            
+                        } else {
+                            c.setBackground(Color.GREEN);
+                            
+                        }
                     }
-                    return c;
+               
+                return c;
                 }
             }
         );
@@ -193,6 +199,7 @@ public class TelaCadastroProdutos extends JPanel {
                     operacoes.cadastrar(carCodigoField.getText(), carNomeField.getText(), carQuantidadeField.getText(),
                             carPClienteVIPField.getText(), carPClienteField.getText(), carDescricaoField.getText());
                     limparCampos();
+                    atualizarTabela();
                    
                 }
             } catch (Exception ex) {
@@ -215,6 +222,7 @@ public class TelaCadastroProdutos extends JPanel {
                     operacoes.atualizar(carCodigoField.getText(), carNomeField.getText(), carQuantidadeField.getText(),
                             carPClienteVIPField.getText(), carPClienteField.getText(), carDescricaoField.getText());
                     limparCampos();
+                     atualizarTabela();
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Ocorreu um erro ao cadastrar o Produto.", "Erro",
@@ -229,6 +237,7 @@ public class TelaCadastroProdutos extends JPanel {
             operacoes.apagar(carCodigoField.getText());
             // Limpa os campos de entrada após a operação de exclusão
             limparCampos();
+             atualizarTabela();
         });
 
         limpar.addActionListener(e -> {

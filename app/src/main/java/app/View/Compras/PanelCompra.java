@@ -9,12 +9,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import app.Connection.ClientesDAO;
 import app.Connection.ProdutosDAO;
+import app.Connection.VendasDAO;
 import app.Controller.VendasController;
 import app.Model.ClienteVIP;
 import app.Model.Produtos;
@@ -41,7 +43,7 @@ public class PanelCompra extends javax.swing.JPanel {
         String dataFormatada = dataAtual.format(formatar);
 
         labelData1.setText(dataFormatada);
-    }
+    }//da pra passar isso pro controller
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,7 +53,8 @@ public class PanelCompra extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+        ImageIcon imagemCliente = new ImageIcon(getClass().getResource(caminhoImgCliente));
+        ImageIcon imagemClienteVIP = new ImageIcon(getClass().getResource(caminhoImgVIP));
         jPanel1 = new javax.swing.JPanel();
         labelTotal = new javax.swing.JFormattedTextField();
         labelBruto = new javax.swing.JFormattedTextField();
@@ -63,7 +66,7 @@ public class PanelCompra extends javax.swing.JPanel {
         inputPesquisaCliente = new javax.swing.JFormattedTextField(formatar("###.###.###-##"));
         comboBoxProduto = new javax.swing.JComboBox<>();
         comboBoxCliente = new javax.swing.JComboBox<>();
-        labelImg = new javax.swing.JLabel();
+        labelImg = new javax.swing.JLabel(imagemCliente);
         btnVender = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnFinalizar = new javax.swing.JButton();
@@ -124,7 +127,10 @@ public class PanelCompra extends javax.swing.JPanel {
             );
         }
 
-        labelImg.setText("jLabel1");
+        labelImg.setIcon(imagemCliente);
+        labelImg.revalidate();
+        labelImg.repaint();
+        
 
 
         btnVender.setText("Vender");
@@ -276,9 +282,7 @@ public class PanelCompra extends javax.swing.JPanel {
             String clienteSelecionado = comboBoxCliente.getSelectedItem().toString();
             int qnt = (int) jSpinnerQuantidade.getValue();
         
-            // Verifica se a venda pode ser realizada com os dados fornecidos
             if (operacoes.realizarVenda(produtoSelecionado, clienteSelecionado, qnt)) {
-                // Se a venda for bem-sucedida, realiza o restante das operações
                 String quantidade = String.valueOf(qnt);
                 String[] produtoInfo = produtoSelecionado.split(" - ");
                 String nomeProduto = produtoInfo[0].trim();
@@ -288,18 +292,33 @@ public class PanelCompra extends javax.swing.JPanel {
                 double valorTotalINT = precoProduto * qnt;
                 String valorTotal = String.valueOf(valorTotalINT);
 
-                        saidaProduto.setText(nomeProduto + "                    R$"+ valorTotal);
+                        saidaProduto.setText(nomeProduto + "                        R$"+ valorTotal);
                         saidaProduto.setFont(new java.awt.Font("Segoe UI Black", 1, 16));
                 operacoes.cadastrar(codigoProduto, nomeProduto, quantidade, clienteSelecionado, valorTotal, labelData1.getText());
+                atualizarTabela();
                 calcularValoresTabela();
+                if(comboBoxCliente.getSelectedIndex() > 0){
+                labelImg.setIcon(imagemClienteVIP);
+                labelImg.revalidate();
+                labelImg.repaint();
+        }
+                int index = comboBoxCliente.getSelectedIndex();
+                comboBoxCliente.setEnabled(false);
+                comboBoxCliente.setEditable(false);
             }
         });
 
         btnCancelar.addActionListener(e -> {
-            operacoes.deletar(TOOL_TIP_TEXT_KEY);
+         int cod = new VendasDAO().recuperaCodigo();
+         String codigoVenda = String.valueOf(cod);
+            operacoes.deletar(codigoVenda);
+            atualizarTabela();
+            calcularValoresTabela();
         });
-
+        
         btnFinalizar.addActionListener(e -> {
+            operacoes.limpar();
+            new TeladeCompras().setVisible(true);
 
         });
         
@@ -324,15 +343,7 @@ public class PanelCompra extends javax.swing.JPanel {
         return mask;
     }
 
-    private void adicionarLinhaTabela() {
-        String clienteSelecionado = comboBoxCliente.getSelectedItem().toString();
-        String produtoSelecionado = comboBoxProduto.getSelectedItem().toString();
-
-        // Adiciona os dados à tabela
-        Object[] rowData = { clienteSelecionado, produtoSelecionado };
-        tableModel.addRow(rowData);
-    }
-
+   
     public void atualizarComboBox() {
 
         clientes = new ClientesDAO().listarTodos();
@@ -359,7 +370,6 @@ public class PanelCompra extends javax.swing.JPanel {
 
         // Percorre todas as linhas da tabela
         for (int i = 0; i < tableModel.getRowCount(); i++) {
-            // Obtém o valor da coluna desejada (supondo que seja a coluna 4)
             String valorString = tableModel.getValueAt(i, 4).toString();
             double valor = Double.parseDouble(valorString);
 
@@ -369,10 +379,24 @@ public class PanelCompra extends javax.swing.JPanel {
         labelTotalValor = total;
         labelTotal.setText("TOTAL: " + total);
     }
+    // Método para atualizar a tabela de exibição com dados do banco de dados
+    private void atualizarTabela() {
+        tableModel.setRowCount(0); // Limpa todas as linhas existentes na tabela
+        vendas = new VendasDAO().listarTodos();
+        // Obtém os carros atualizados do banco de dados
+        for (Vendas venda : vendas) {
+            // Adiciona os dados de cada carro como uma nova linha na tabela Swing
+            tableModel.addRow(new Object[] { venda.getCodigoProduto(), venda.getNomeProduto(),
+
+                    venda.getQuantidadeProduto(), venda.getCliente(), venda.getValor(), venda.getData(), venda.getCodVenda() });
+        }
+    }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
-    
+   
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnVender;
     private javax.swing.JComboBox<String> comboBoxCliente;
@@ -393,14 +417,15 @@ public class PanelCompra extends javax.swing.JPanel {
     private javax.swing.JLabel labelData1;
     private javax.swing.JFormattedTextField labelDesconto;
     private javax.swing.JLabel labelImg;
-    private javax.swing.JFormattedTextField labelTotal;
+    public javax.swing.JFormattedTextField labelTotal;
     private javax.swing.JFormattedTextField saidaProduto;
     private DefaultTableModel tableModel;
     private List<Vendas> vendas;
     private double labelBrutoValor = 0;
     private double labelDescontoValor = 0;
-    private double labelTotalValor = 0;
-
+    public double labelTotalValor = 0;
+    String caminhoImgCliente = "./../resources/cliente.png";
+    String caminhoImgVIP = "./../resources/cartao-vip.png";
 
     
 

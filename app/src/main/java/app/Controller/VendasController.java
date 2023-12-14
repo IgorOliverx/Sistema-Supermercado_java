@@ -36,7 +36,7 @@ public class VendasController {
             // Adiciona os dados de cada carro como uma nova linha na tabela Swing
             tableModel.addRow(new Object[] { venda.getCodigoProduto(), venda.getNomeProduto(),
 
-                    venda.getQuantidadeProduto(), venda.getCliente(), venda.getValor(), venda.getData() });
+                    venda.getQuantidadeProduto(), venda.getCliente(), venda.getValor(), venda.getData(), venda.getCodVenda() });
         }
     }
 
@@ -57,8 +57,8 @@ public class VendasController {
         try {Object[] opcoes = { "Sim", "Não" };
             if (linhaSelecionada >= 0) {
                 int resposta = JOptionPane.showOptionDialog(null,
-                        "Você tem certeza que quer excluir este cliente? ",
-                        "Excluir Cliente", JOptionPane.YES_NO_OPTION,
+                        "Você tem certeza que quer excluir esta venda? ",
+                        "Excluir Venda", JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
                 if (resposta == JOptionPane.YES_OPTION) {
                     new VendasDAO().deletar(codVenda);
@@ -75,11 +75,10 @@ public class VendasController {
         }
     }
 
-    // public void atualizar(String codigoProduto, String nomeProduto, String quantidadeProduto, String cliente,
-    //         String valor, String data) {
-    //     Vendas vendaAtualizada = new Vendas(codigoProduto, nomeProduto, quantidadeProduto, cliente, valor, data);
-    //     new VendasDAO().atualizar(vendaAtualizada);
-    // }
+    public void limpar(){
+        new VendasDAO().limparTabela();
+    }
+
 
     public boolean realizarVenda(String produtoSelecionado, String clienteSelecionado, int quantidade) {
         String[] infosProduto = produtoSelecionado.split(" - ");

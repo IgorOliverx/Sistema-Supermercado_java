@@ -9,6 +9,7 @@ public class Vendas {
     private String cliente;
     private String valor;
     private String data;
+    private int codVenda;
 
 
     public Vendas() {
@@ -43,6 +44,10 @@ public class Vendas {
     }
     public String getData(){
         return data;
+    }
+
+    public int getCodVenda(){
+        return codVenda;
     }
 
 
