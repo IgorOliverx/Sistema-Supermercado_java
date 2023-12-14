@@ -52,7 +52,6 @@ public class ClientesController {
         
     }
 
-    
     public void deletar(String cpf){
         Object[] opcoes = { "Sim", "Não" };
 
@@ -92,7 +91,6 @@ public class ClientesController {
 
     }
 
-    //Método para realizar a validação de dados
     public boolean validarDados(String nome, String cpf, String telefone,String sexo, String email, String data){
         boolean dadosValidos = true;
 
@@ -117,7 +115,6 @@ public class ClientesController {
         return dadosValidos;
     }
 
-    //Expressão regular para validar email
     public boolean validarEmail(String email){
         String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
 
