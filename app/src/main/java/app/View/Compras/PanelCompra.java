@@ -294,8 +294,8 @@ public class PanelCompra extends javax.swing.JPanel {
                 double valorTotalINT = precoProduto * qnt;
                 String valorTotal = String.valueOf(valorTotalINT);
 
-                        saidaProduto.setText(nomeProduto + "                        R$"+ valorTotal);
-                        saidaProduto.setFont(new java.awt.Font("Segoe UI Black", 1, 16));
+                saidaProduto.setText(nomeProduto + "                        R$"+ valorTotal);
+                saidaProduto.setFont(new java.awt.Font("Segoe UI Black", 1, 16));
                 operacoes.cadastrar(codigoProduto, nomeProduto, quantidade, clienteSelecionado, valorTotal, labelData1.getText());
                 atualizarTabela();
                 calcularValoresTabela();

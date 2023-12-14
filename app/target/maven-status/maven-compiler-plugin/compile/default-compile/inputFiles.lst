@@ -1,31 +1,24 @@
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Controller\VendasController.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Model\ClienteVIP.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Connection\VendasDAO.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Controller\LoginController.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\View\Compras\TelaDeCompraDeProdutos.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Controller\Funcionarios\CaixaController.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Controller\Funcionarios\GerenteController.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\View\Estoque\TelaDeGerenciamentoEstoque.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\View\TelaDeInicio.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\View\Cadastro\TelaDeCadastroClienteVIP.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Model\Funcionarios\Funcionario.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Model\Funcionarios\Gerente.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Model\Funcionarios\Caixa.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\View\Vendas\TelaDeRelatorioDeVendas.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Connection\ClientesDAO.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Controller\ClientesController.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Model\Produtos.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Logs\log.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\View\Cadastro\TelaCadastroProdutos.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\View\Compras\TelaDeConclusaoDeCompra.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\View\Vendas\TelaDeVendas.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Connection\CrudDAO.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Connection\LoginDAO.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Main.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Connection\ProdutosDAO.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\View\Compras\PanelCompra.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\View\Hierarquia\JanelaGerente.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Connection\ConnectionFactory.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Controller\ProdutosController.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\View\Hierarquia\JanelaCaixa.java
-C:\Users\Olimpíada\Documents\PROJETO FINAL JAVA\Sistema-de-Supermercado\app\src\main\java\app\Model\Vendas.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Connection\VendasDAO.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Connection\ConnectionFactory.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Connection\CrudDAO.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\View\Compras\TeladeCompras.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\View\TelaDeInicio.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\View\Cadastro\TelaDeCadastroClienteVIP.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Logs\GerarNotaFiscal.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\View\Hierarquia\JanelaCaixa.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Model\Produtos.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Controller\ClientesController.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\View\Compras\PanelCompra.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Connection\ClientesDAO.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\View\Cadastro\TelaCadastroProdutos.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\View\Hierarquia\JanelaGerente.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Controller\ProdutosController.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Controller\VendasController.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Logs\Log.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Main.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Model\ClienteVIP.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Connection\ProdutosDAO.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\View\Vendas\TelaDeVendas.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Model\Vendas.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Connection\LoginDAO.java
+C:\Users\Olimpíada\Desktop\Sistema-Supermercado_java\app\src\main\java\app\Controller\LoginController.java
