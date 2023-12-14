@@ -1,6 +1,7 @@
 package app.Controller;
 
 import app.Connection.ProdutosDAO;
+import app.Logs.Log;
 import app.Model.Produtos;
 
 import java.text.NumberFormat;
@@ -56,6 +57,8 @@ public class ProdutosController {
         JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso");
         // Atualiza a tabela de exibição após o cadastro
         atualizarTabela();
+         new Log();
+        Log.registrarOperacao("Produto cadastrado com sucesso");
     }
 
     public void atualizar(String codigoBarras, String nome, String quantidade, String custoClienteVIP,
@@ -69,6 +72,8 @@ public class ProdutosController {
         JOptionPane.showMessageDialog(null, "Produto editado com sucesso");
         // Atualiza a tabela de exibição após a atualização
         atualizarTabela();
+        new Log();
+        Log.registrarOperacao("Produto editado com sucesso");
     }
 
     // Método para apagar um carro do banco de dados
@@ -87,6 +92,8 @@ public class ProdutosController {
                     new ProdutosDAO().deletar(codigo);
                     atualizarTabela(); // Atualiza a tabela de exibição após a exclusão
                     JOptionPane.showMessageDialog(null, "Produto deletado com sucesso!");
+                    new Log();
+                     Log.registrarOperacao("Produto deletado com sucesso");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor, selecione um Produto", "Erro nos dados",

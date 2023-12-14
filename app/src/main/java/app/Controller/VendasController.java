@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import app.Connection.ClientesDAO;
 import app.Connection.ProdutosDAO;
 import app.Connection.VendasDAO;
+import app.Logs.Log;
 import app.Model.ClienteVIP;
 import app.Model.Vendas;
 
@@ -50,6 +51,8 @@ public class VendasController {
         atualizarTabela();
         JOptionPane.showMessageDialog(null, "Venda realizada!");
         new ProdutosDAO().atualizarEstoque(codigoProduto, quantidade);
+        new Log();
+        Log.registrarOperacao("Venda realizada com sucesso");
     }
 
     public void deletar(String codVenda) {
@@ -64,6 +67,8 @@ public class VendasController {
                     new VendasDAO().deletar(codVenda);
                     atualizarTabela(); // Atualiza a tabela de exibição após a exclusão
                     JOptionPane.showMessageDialog(null, "Venda deletada com sucesso!");
+                    new Log();
+        Log.registrarOperacao("Venda deletada com sucesso");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor, selecione uma venda", "Erro nos dados",

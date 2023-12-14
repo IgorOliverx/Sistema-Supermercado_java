@@ -7,6 +7,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import app.Connection.ClientesDAO;
+import app.Logs.Log;
 import app.Model.ClienteVIP;
 import app.View.Cadastro.TelaDeCadastroClienteVIP;
 
@@ -46,6 +47,8 @@ public class ClientesController {
         // Chama o método de cadastro no banco de dados
         JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso");
         atualizarTabela();
+        new Log();
+        Log.registrarOperacao("Cliente cadastrado com sucesso");
         
     }
 
@@ -64,6 +67,8 @@ public class ClientesController {
             new ClientesDAO().deletar(cpf);
             JOptionPane.showMessageDialog(null, "Cliente deletado com sucesso!");
             atualizarTabela();
+             new Log();
+        Log.registrarOperacao("Cliente deletado com sucesso");
         }
     }else{
          JOptionPane.showMessageDialog(null, "Por favor, selecione um cliente", "Erro nos dados", JOptionPane.ERROR_MESSAGE);
@@ -81,6 +86,8 @@ public class ClientesController {
         ClienteVIP clienteAtualizado = new ClienteVIP(nome, cpf, telefone, sexo, email, data);
         new ClientesDAO().atualizar(clienteAtualizado);
         JOptionPane.showMessageDialog(null, "Cliente editado com sucesso");
+         new Log();
+        Log.registrarOperacao("Cliente editado com sucesso");
 
     }
 

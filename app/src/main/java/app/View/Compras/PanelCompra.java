@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
@@ -18,6 +19,7 @@ import app.Connection.ClientesDAO;
 import app.Connection.ProdutosDAO;
 import app.Connection.VendasDAO;
 import app.Controller.VendasController;
+import app.Logs.GerarNotaFiscal;
 import app.Model.ClienteVIP;
 import app.Model.Produtos;
 import app.Model.Vendas;
@@ -318,7 +320,12 @@ public class PanelCompra extends javax.swing.JPanel {
         
         btnFinalizar.addActionListener(e -> {
             operacoes.limpar();
-            new TeladeCompras().setVisible(true);
+           JOptionPane.showMessageDialog(null ,"Obrigado por comprar conosco!");
+           String clienteSelecionado = comboBoxCliente.getSelectedItem().toString();
+           new GerarNotaFiscal();
+           GerarNotaFiscal.gerarNotaFiscal(labelTotalValor, clienteSelecionado);
+           System.exit(0);
+
 
         });
         
@@ -348,7 +355,7 @@ public class PanelCompra extends javax.swing.JPanel {
 
         clientes = new ClientesDAO().listarTodos();
         comboBoxCliente.removeAllItems();
-        comboBoxCliente.addItem("Selecione o cliente");
+        comboBoxCliente.addItem("Cliente");
         for (ClienteVIP cliente : clientes) {
             comboBoxCliente.addItem(cliente.getNome()
                     + "   -   " + cliente.getCpf());

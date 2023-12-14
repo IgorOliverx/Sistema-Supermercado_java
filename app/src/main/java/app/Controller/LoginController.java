@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import app.Connection.LoginDAO;
 import app.Connection.VendasDAO;
+import app.Logs.Log;
 import app.View.TelaDeInicio;
 import app.View.Hierarquia.JanelaGerente;
 import app.View.Hierarquia.JanelaCaixa;
@@ -20,7 +21,7 @@ public class LoginController {
     public LoginController() {
         super();
     }
-    
+
     public void verificaLogin(String usuario, String senha, String tipoUsuario) {
         LoginDAO login = new LoginDAO();
         if (usuario == null || "".equals(usuario) || senha == null || "".equals(senha)) {
@@ -28,31 +29,34 @@ public class LoginController {
                     JOptionPane.WARNING_MESSAGE);
         } else {
             boolean loginValido = login.verificarLogin(usuario, senha, tipoUsuario);
-    
+
             if (loginValido) {
                 if (tipoUsuario.equals("gerente")) {
                     isGerente = true;
                     new JanelaGerente();
+                    new Log();
+                    Log.registrarOperacao("Login feito como gerente");
                 } else if (tipoUsuario.equals("caixa")) {
                     isCaixa = true;
                     new JanelaCaixa();
+                    new Log();
+                    Log.registrarOperacao("Login feito como caixa");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!", "", JOptionPane.WARNING_MESSAGE);
             }
         }
     }
-    
 
-    public void inicializacao(){
+    public void inicializacao() {
         LoginDAO init = new LoginDAO();
         init.criaTabela();
         init.inicializarBanco();
-        TelaDeInicio loginView = new TelaDeInicio();//criando um objeto da pagina de login
-        LoginController loginController = new LoginController(loginView);//iniciando a pagina de login a partir do controller
+        TelaDeInicio loginView = new TelaDeInicio();// criando um objeto da pagina de login
+        LoginController loginController = new LoginController(loginView);// iniciando a pagina de login a partir do
+                                                                         // controller
         VendasDAO ini = new VendasDAO();
         ini.criarTabela();
-                
 
     }
 

@@ -29,7 +29,7 @@ public class ClientesDAO extends CrudDAO<ClienteVIP> {
    
     
     /**
-     * Herdando métodos abstratos da classe CrudDAO
+     * Implementação para criar a tabela de clientes
      */
     @Override
     public void criarTabela() {// alinhar com o eduardo colunas da tabela
@@ -37,11 +37,8 @@ public class ClientesDAO extends CrudDAO<ClienteVIP> {
 
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
-            new Log();
-            Log.registrarOperacao("Tabela de clientes VIP criada com sucesso -> função criartabela ClientesDAO");
+            System.out.println("Tabela de clientes vip criada com sucesso");
         } catch (SQLException e) {
-            new Log();
-            Log.registrarOperacao("Erro ao criar tabela -> função criar tabela ClientesDAO");
             throw new RuntimeException("Erro ao criar tabela " + e.getMessage() + e.getSQLState());
         } finally {
             app.Connection.ConnectionFactory.closeConnection(this.connection);
@@ -50,7 +47,7 @@ public class ClientesDAO extends CrudDAO<ClienteVIP> {
     }
 
     /*
-     * Implementação para Retornar um cliejte da lista a partir do cpf -> chave
+     * Implementação para Retornar um cliente da lista a partir do cpf -> chave
      * primaria
      */
     @Override
@@ -75,8 +72,6 @@ public class ClientesDAO extends CrudDAO<ClienteVIP> {
                 );
             }
         } catch (SQLException e) {
-            new Log();
-            Log.registrarOperacao("Cliente NÃO ENCONTRADO -> função procurar por id ClientesDAO");
             throw new RuntimeException("Cliente não encontrado" + e.getMessage() + e.getSQLState());
         } finally {
             ConnectionFactory.closeConnection(connection, stmt, rs);
@@ -110,8 +105,6 @@ public class ClientesDAO extends CrudDAO<ClienteVIP> {
                 clientesVIP.add(clienteVIP);
             }
         } catch (SQLException e) {
-           new Log();
-            Log.registrarOperacao("Erro ao listar todos-> função deletar ClientesDAO");
             throw new RuntimeException("Erro ao listar todos os clientes "+ e.getMessage() + e.getSQLState());
         } finally {
             app.Connection.ConnectionFactory.closeConnection(connection, stmt, rs);
@@ -139,8 +132,6 @@ public class ClientesDAO extends CrudDAO<ClienteVIP> {
             System.out.println("Dados inseridos com sucesso - substituir por log do sistema");
 
         } catch (SQLException e) {
-            new Log();
-            Log.registrarOperacao("Erro ao inserir dados -> função cadastrar ClientesDAO");
             throw new RuntimeException("Erro ao inserir dados " + e.getMessage());
         } finally {
             ConnectionFactory.closeConnection(connection, stmt);
@@ -169,13 +160,15 @@ public class ClientesDAO extends CrudDAO<ClienteVIP> {
             Log.registrarOperacao("Dado atualizado com sucesso -> função atualizar ClientesDAO");
 
         } catch (SQLException e) {
-            new Log();
-            Log.registrarOperacao("Erro ao atualizar clientes -> função atualizar ClientesDAO");
             throw new RuntimeException("Erro ao atualizar cliente " + e.getMessage() + e.getSQLState());
         } finally {
             app.Connection.ConnectionFactory.closeConnection(connection, stmt);
         }
     }
+
+    /*
+     * Implementação para deletar registros existentes no banco de dados
+     */
 
     @Override
     public void deletar(String cpf) {
@@ -190,8 +183,6 @@ public class ClientesDAO extends CrudDAO<ClienteVIP> {
             new Log();
             Log.registrarOperacao("Dado apagado com sucesso -> função deletar ClientesDAO");
         } catch (SQLException e) {
-            new Log();
-            Log.registrarOperacao("ERRO NA EXCLUSÃO DO CLIENTE -> função deletar ClientesDAO");
             throw new RuntimeException("Erro na exclusão do cliente: " + e.getMessage() + e.getSQLState());
         } finally {
             ConnectionFactory.closeConnection(connection, stmt);
@@ -199,7 +190,9 @@ public class ClientesDAO extends CrudDAO<ClienteVIP> {
     }
 
 
-
+/*
+     * Implementação para consultar registros existentes no banco de dados
+     */
     @Override
     public double consulta(String codigo) {
         // TODO Auto-generated method stub
@@ -214,6 +207,9 @@ public class ClientesDAO extends CrudDAO<ClienteVIP> {
         throw new UnsupportedOperationException("Unimplemented method 'verificarEstoque'");
     }
 
+    /*
+     * Implementação para conculstar cliente registros existentes no banco de dados
+     */
     public boolean consultarCliente(String cpf) {
         PreparedStatement stmt = null;
         ResultSet rs = null;

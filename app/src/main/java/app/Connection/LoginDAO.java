@@ -17,7 +17,9 @@ public class LoginDAO {
          this.connection = ConnectionFactory.getConnection();
      }
  
-      // Método de verificação de tabela existente
+    /*
+     * Implementação para verificar se a tabela existe
+     */
      private boolean tabelaExiste() {
          boolean tabelaExiste = false;
          String verificaTabela = "SELECT 1 FROM login LIMIT 1";
@@ -34,19 +36,22 @@ public class LoginDAO {
          return tabelaExiste;
      }
 
-      // Método para criar a tabela se ela não existir
+      /*
+     * Implementação para criar a tabela no banco de dados
+     */
      public void criaTabela(){
          String sql = "CREATE TABLE IF NOT EXISTS login (SENHA VARCHAR(30), USUARIO VARCHAR(25) PRIMARY KEY, SENHACAIXA VARCHAR(30), USUARIOCAIXA VARCHAR(30) )";
          try (Statement stmt = this.connection.createStatement()) {
              stmt.execute(sql);
-             new Log();
-            Log.registrarOperacao("Tabela Criada com sucesso!");
+            System.out.println("Tabela de login criada com sucesso");
          } catch (SQLException e) {
              throw new RuntimeException("Erro ao criar a tabela: " + e.getMessage(), e);
          } 
      }
 
-     // Método de inicialização do banco
+     /*
+     * Implementação para inicializar o banco de dados
+     */
      public void inicializarBanco() {
          try{
              // Verifica se a tabela existe; se não existir, cria e preenche com credenciais padrão
@@ -56,11 +61,9 @@ public class LoginDAO {
                  System.out.println("tabela ta sendo preenchida");
              }
              preencherTabela("adm", "adm", "caixa", "caixa");
-                 new Log();
-            Log.registrarOperacao("Tabela sendo preenchida" );
+                System.out.println("Tabela preenchida com credenciais");
          } catch(Exception e){
-             new Log();
-            Log.registrarOperacao("Não foi possível inserir credenciais" + e.getMessage());
+             System.out.println("De momento não fora possivel inserir credenciais" + e.getMessage());
          }
      }
  
@@ -68,7 +71,9 @@ public class LoginDAO {
  
     
  
-     // Método para preencher a tabela com credenciais padrão
+     /*
+     * Implementação para preencher a tabela com as credenciais
+     */
      public void preencherTabela(String usuario, String senha, String usuarioCaixa, String senhaCaixa) {
          PreparedStatement stmt = null;
          String sql = "INSERT INTO login (usuario, senha, usuariocaixa, senhacaixa) VALUES (?, ?, ?, ?)";
@@ -85,6 +90,9 @@ public class LoginDAO {
          } 
      }
  
+     /*
+     * Implementação para verificar o login e direcionar corretamente
+     */
      public boolean verificarLogin(String usuario, String senha, String tipoUsuario){
         PreparedStatement stmt = null;
         boolean loginValido = false;
