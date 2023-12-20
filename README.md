@@ -35,6 +35,8 @@ Gera um cupom fiscal com um resumo da compra contendo valor total, nome do clien
 
 ### Observações
 - O sistema pode ser logado tanto como caixa ou como gerente (diferença nas Funcionalidades).
+- LOGIN COMO GERENTE: user:"adm" senha:"adm"
+- LOGIN COMO CAIXA: user:"caixa" senha:"caixa"
 - O sistema permite a consulta, atualização e exclusão de clientes e produtos.
 - É possível visualizar todos os clientes e produtos cadastrados na interface principal.
 - Sempre atualize o estoque dos produtos após uma venda.
