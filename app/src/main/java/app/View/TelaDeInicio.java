@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package app.View;
 
 import javax.print.DocFlavor.URL;
@@ -15,7 +12,7 @@ import app.Controller.LoginController;
 
 /**
  *
- * @author igorf
+ * @author igorf and Edu
  */
 public class TelaDeInicio extends javax.swing.JFrame {
 
@@ -86,9 +83,10 @@ public class TelaDeInicio extends javax.swing.JFrame {
             
             // Verifica se o usuário é gerente após a tentativa de login
             if (operacao.isGerente()) {
-                new app.View.Hierarquia.JanelaGerente().setVisible(true);;
-                
-                
+                dispose();
+                new app.View.Hierarquia.JanelaGerente().setVisible(true);
+
+
                 loginRealizado = true;
             }
         
@@ -98,6 +96,7 @@ public class TelaDeInicio extends javax.swing.JFrame {
         
                 // Verifica se o usuário é caixa após a tentativa de login
                 if (operacao.isCaixa()) {
+                    dispose();
                     new app.View.Hierarquia.JanelaCaixa().setVisible(true);
                     //TelaDeInicio.dispose();
                     loginRealizado = true;

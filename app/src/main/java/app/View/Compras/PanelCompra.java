@@ -4,6 +4,8 @@
  */
 package app.View.Compras;
 
+import java.awt.Dimension;
+import java.awt.Font;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +14,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -26,7 +29,7 @@ import app.Model.Vendas;
 
 /**
  *
- * @author Igor Oliveira
+ * @author Igor Oliveira and Edu
  */
 public class PanelCompra extends javax.swing.JPanel {
 
@@ -37,16 +40,16 @@ public class PanelCompra extends javax.swing.JPanel {
         initComponents();
         preencherDataSistema();
     }
-
+    
     private void preencherDataSistema() {
         LocalDate dataAtual = LocalDate.now();
-
+        
         DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dataFormatada = dataAtual.format(formatar);
-
+        
         labelData1.setText(dataFormatada);
-    }//da pra passar isso pro controller
-
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +58,7 @@ public class PanelCompra extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        VendasController operacoes = new VendasController(vendas, tableModel, table);
         ImageIcon imagemCliente = new ImageIcon(getClass().getResource(caminhoImgCliente));
         ImageIcon imagemClienteVIP = new ImageIcon(getClass().getResource(caminhoImgVIP));
         jPanel1 = new javax.swing.JPanel();
@@ -64,7 +68,10 @@ public class PanelCompra extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         saidaProduto = new javax.swing.JFormattedTextField();
         jSpinnerQuantidade = new javax.swing.JSpinner();
+        jSpinnerQuantidade.setFont(new FontUIResource(jSpinnerQuantidade.getFont().getName(), Font.PLAIN, 15)); 
+        jSpinnerQuantidade.setPreferredSize(new Dimension(45, 30));
         inputPesquisaProduto = new javax.swing.JFormattedTextField();
+        
         inputPesquisaCliente = new javax.swing.JFormattedTextField(formatar("###.###.###-##"));
         comboBoxProduto = new javax.swing.JComboBox<>();
         comboBoxCliente = new javax.swing.JComboBox<>();
@@ -277,7 +284,9 @@ public class PanelCompra extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        VendasController operacoes = new VendasController(vendas, tableModel, table);
+       
+
+
 
         btnVender.addActionListener(e -> {
             String produtoSelecionado = comboBoxProduto.getSelectedItem().toString();
@@ -294,8 +303,8 @@ public class PanelCompra extends javax.swing.JPanel {
                 double valorTotalINT = precoProduto * qnt;
                 String valorTotal = String.valueOf(valorTotalINT);
 
-                        saidaProduto.setText(nomeProduto + "                        R$"+ valorTotal);
-                        saidaProduto.setFont(new java.awt.Font("Segoe UI Black", 1, 16));
+                saidaProduto.setText(nomeProduto + "                        R$"+ valorTotal);
+                saidaProduto.setFont(new java.awt.Font("Segoe UI Black", 1, 16));
                 operacoes.cadastrar(codigoProduto, nomeProduto, quantidade, clienteSelecionado, valorTotal, labelData1.getText());
                 atualizarTabela();
                 calcularValoresTabela();
@@ -375,7 +384,6 @@ public class PanelCompra extends javax.swing.JPanel {
     private void calcularValoresTabela() {
         double total = 0;
 
-        // Percorre todas as linhas da tabela
         for (int i = 0; i < tableModel.getRowCount(); i++) {
             String valorString = tableModel.getValueAt(i, 4).toString();
             double valor = Double.parseDouble(valorString);

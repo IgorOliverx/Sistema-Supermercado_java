@@ -101,7 +101,7 @@ public class TelaDeCadastroClienteVIP extends JPanel {
 
 
         botoes.add(apagar = new JButton("Apagar"));
-        apagar.setBackground(Color.green);
+        apagar.setBackground(Color.red);
         apagar.setOpaque(true);
       
 

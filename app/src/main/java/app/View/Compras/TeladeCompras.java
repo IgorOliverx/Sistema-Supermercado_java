@@ -14,7 +14,7 @@ import app.Model.Produtos;
 
 /**
  *
- * @author DevTARDE A
+ * @author igorf and Edu
  */
 public class TeladeCompras extends javax.swing.JFrame {
 

@@ -1,5 +1,0 @@
-Cupom Fiscal
-
-Data: 14/12/2023 11:02:20
-Cliente: Selecione o cliente
-Valor Total: R$0.0

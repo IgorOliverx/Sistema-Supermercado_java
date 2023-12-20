@@ -1,10 +1,12 @@
 package app.Controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import app.Connection.ClientesDAO;
 import app.Connection.ProdutosDAO;
@@ -41,9 +43,10 @@ public class VendasController {
         }
     }
 
-    // Método para cadastrar um novo cliente no banco de dados
+    // Método para VENDER
     public void cadastrar(String codigoProduto, String nomeProduto, String quantidadeProduto, String cliente,
             String valor, String data) {
+                
         int quantidade = Integer.parseInt(quantidadeProduto);
         Vendas novaVenda = new Vendas(codigoProduto, nomeProduto, quantidadeProduto, cliente, valor, data);
         new VendasDAO().cadastrar(novaVenda);
@@ -82,6 +85,17 @@ public class VendasController {
 
     public void limpar(){
         new VendasDAO().limparTabela();
+    }
+
+
+      public static MaskFormatter formatar(String mensagem) {
+        MaskFormatter mask = null;
+        try {
+            mask = new MaskFormatter(mensagem);
+        } catch (ParseException e) {
+            throw new RuntimeException("Erro na mascara" + e.getMessage());
+        }
+        return mask;
     }
 
 
